@@ -1,23 +1,61 @@
+// components 
+import Link from 'next/link';
 import Image from 'next/image';
-import styles from '../../styles/templates/Home-tp.module.css';
-import thelastepistlesLogo from '../../public/thelastepistles.png';
-
-// Import socials icons
-import facebookI from '../../public/assets/icons/facebook-i.svg'
-import applemusicI from '../../public/assets/icons/applemusic-i.svg'
-import instagramI from '../../public/assets/icons/instagram-i.svg'
-import spotifyI from '../../public/assets/icons/spotify-i.svg'
 import NavbarModule from '../modules/Navbar';
+import { useState, useEffect, useRef } from 'react';
+
+// styles
+import styles from '../../styles/templates/Home-tp.module.css';
+
+// icons / constants / other assets
+import thelastepistlesLogo from '../../public/thelastepistles.png';
+import { SocialMediaList } from "../constants/socials.json"
+
 
 function HomePage(props) {
+
+  const [socialsListClassname, setSocialsListClassname] = useState('false')
+  const [timeoutId, setTimeoutId] = useState(null);
+
+  const handleLogoHover = () => {
+    setSocialsListClassname('active');
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+  };
+
+  const handleLogoHoverLeave = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+    setTimeoutId(setTimeout(() => {
+      setSocialsListClassname('inactive')
+    }, 1700));
+  };
+
+  const halfway = Math.ceil(SocialMediaList.length / 2);
+  const firstGroup = SocialMediaList.slice(0, halfway);
+  const secondGroup = SocialMediaList.slice(halfway);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        setTimeoutId(null);
+      }
+    };
+  }, [timeoutId]);
+
   return (
-    <div className={styles.container} >
+    <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.main_heading_container}>
           <h1 className={styles.main_heading}>
-            <span className={styles.main_heading_span}>thelastepistles</span>
-            <span className={styles.main_heading_span}>R</span>
-            <span className={styles.main_heading_span}>ecords</span>
+            <span>thelastepistles</span>
+            <span style={{ color: "black!important" }}>R</span>
+            <span>ecords</span>
           </h1>
         </div>
 
@@ -30,54 +68,42 @@ function HomePage(props) {
         <div className={styles.socials_container}>
           <div className={styles.socials_logo_container}>
             <div className={styles.socials_logo}>
-              <Image src={thelastepistlesLogo}
+              <Image className={styles.socials_logo_image}
+                src={thelastepistlesLogo}
                 alt="Thelastepistles - LOGO"
-                width={380}
-                height={380} />
+                unoptimized
+              />
             </div>
-            <div className={styles.image_overlay} />
+            <div
+              className={styles.image_overlay}
+              onMouseOver={handleLogoHover}
+              onMouseLeave={handleLogoHoverLeave}
+            />
           </div>
 
           <div className={styles.socials_links_container}>
             <div className={styles.socials_links}>
-              <ul className={styles.socials_list}>
-                <div className={styles.socials_list_b}>
-                  <li className={styles.socials_list_item}>
-                    <div className={styles.socials_link_container}>
-                      <Image src={applemusicI}
-                        alt="Apple Music"
-                        width={52}
-                        height={52} />
-                    </div>
-                  </li>
-                  <li className={styles.socials_list_item}>
-                    <div className={styles.socials_link_container}>
-                      <Image src={spotifyI}
-                        alt="Spotify"
-                        width={52}
-                        height={52} />
-                    </div>
-                  </li>
-                </div>
-                <div className={styles.socials_list_b}>
-                  <li className={styles.socials_list_item}>
-                    <div className={styles.socials_link_container}>
-                      <Image src={facebookI}
-                        alt="Facebook"
-                        width={52}
-                        height={52} />
-                    </div>
-                  </li>
-                  <li className={styles.socials_list_item}>
-                    <div className={styles.socials_link_container}>
-                      <Image src={instagramI}
-                        alt="Instagram"
-                        width={52}
-                        height={52} />
-                    </div>
-                  </li>
-                </div>
-              </ul>
+              <div className={styles.socials_list}>
+                <ul className={styles.socials_list_b}>
+                  {firstGroup.map((item, index) => (
+                    <li key={index} className={styles.socials_list_item}>
+                      <Link href={item.href} target='_blank' className={styles.socials_link_container}>
+                        <i className={item.icon}></i>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <div className={`${styles.socials_links_gap} socials_links_gap_${socialsListClassname}`}></div>
+                <ul className={styles.socials_list_a}>
+                  {secondGroup.map((item, index) => (
+                    <li key={index} className={styles.socials_list_item}>
+                      <Link href={item.href} target='_blank' className={styles.socials_link_container}>
+                        <i className={item.icon}></i>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

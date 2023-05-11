@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../../styles/modules/Navbar-ml.module.css'
+import styles from '../../styles/modules/Navbar-ml.module.css';
 
 function NavbarModule(props) {
   return (
@@ -7,6 +7,13 @@ function NavbarModule(props) {
       <nav className={styles.navbar}>
         <div className={styles.navbar_inner}>
           <div className={styles.navbar_left_container}>
+
+            <div className={styles.hamburger_menu_container}>
+              <button className={styles.hamburger_menu_button}>
+                <i className="fa-solid fa-bars"></i>
+              </button>
+            </div>
+
             <ul className={styles.navbar_left_list}>
               <li className={styles.navbar_left_item}>
                 <Link id={styles.home_link} href="/home" className={styles.nabar_left_item_link}>
@@ -56,7 +63,7 @@ function NavbarModule(props) {
             <div className={styles.login_button_container}>
               <Link id={styles.signin_link} href="/login" className={styles.nabar_left_item_link}>
                 <span className={styles.navbar_left_item_text}>
-                  Signin
+                  Artist Signin
                 </span>
               </Link>
             </div>

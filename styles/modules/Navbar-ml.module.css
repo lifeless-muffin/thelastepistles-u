@@ -10,7 +10,7 @@
 
 .navbar {
   width: 90%;
-  max-width: 67.5rem;
+  max-width: 73.75rem;
 
   display: flex;
   align-items: center;
@@ -26,10 +26,12 @@
 .navbar_left_container {
   width: fit-content;
   height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--black);
-  color: white;
 
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .navbar_left_list {
@@ -56,13 +58,13 @@
 
   width: 100%; 
   height: 100%;
-  padding: 0px 36px;
+  padding: 0px 38px;
 }
 
 .navbar_left_item_text {
   font-style: normal;
   font-weight: 400;
-  font-size: 1.125;
+  font-size: 1.12rem;
 
   display: flex;
   align-items: center;
@@ -71,12 +73,49 @@
 }
 
 .navbar_right_container {
-  width: 7.5rem;
+  width: 11rem;
   height: 3.75rem;
-  border-radius: 10px;
+  border-radius: 15px;
 
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--black);
+}
+
+.hamburger_menu_container {
+  display: none;
+}
+
+.hamburger_menu_button {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 3.75rem;
+}
+
+@media screen and (max-width: 1080px) {
+  .nabar_left_item_link {
+    padding: 0px 24px;
+  }
+
+  .navbar_right_container {
+    width: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .hamburger_menu_container {
+    display: inline;
+    padding: 0px 8px;
+  }
+
+  .navbar_left_list {
+    display: none;
+  }
 }

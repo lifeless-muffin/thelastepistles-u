@@ -14,7 +14,7 @@ import { SocialMediaList } from "../constants/socials.json"
 
 function HomePage(props) {
 
-  const [socialsListClassname, setSocialsListClassname] = useState('false')
+  const [socialsListClassname, setSocialsListClassname] = useState(false)
   const [timeoutId, setTimeoutId] = useState(null);
 
   const handleLogoHover = () => {
@@ -93,7 +93,7 @@ function HomePage(props) {
                     </li>
                   ))}
                 </ul>
-                <div className={`${styles.socials_links_gap} socials_links_gap_${socialsListClassname}`}></div>
+                <div className={`${styles.socials_links_gap} ${socialsListClassname !== false ? socialsListClassname === 'active' ? styles.socials_links_gap_active : styles.socials_links_gap_inactive : ''}`}></div>
                 <ul className={styles.socials_list_a}>
                   {secondGroup.map((item, index) => (
                     <li key={index} className={styles.socials_list_item}>

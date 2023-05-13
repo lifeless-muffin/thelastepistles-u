@@ -1,8 +1,8 @@
 .container {
   width: 100%;
-  height: 100%;
-
-  background: transparent;  
+  height: calc(100% - 4% - 3.75rem);
+  
+  background: green;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,10 +10,7 @@
 
 .header {
   width: 100%;
-  row-gap: 5px;
-  top: 10%;
   
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,7 +99,7 @@
 
 .socials_links_container {
   width: 50rem;
-  height: 390px;
+  height: 24.375rem;
 
   display: flex;
   align-items: center;
@@ -160,6 +157,14 @@
   height: 52px;
 }
 
+.socials_links_gap_active {
+  animation: socials_links_active 0.6s forwards;
+}
+
+.socials_links_gap_inactive {
+  animation: socials_links_inactive 0.4s forwards;
+}
+
 .socials_logo_container {
   max-width: 380px;
   max-height: 380px;
@@ -170,33 +175,57 @@
   max-height: 380px;
 }
 
-/* For tablet */
-@media screen and (max-width: 1080px) {
+/* Styles for extra small devices */
+@media (max-width: 575.98px) { /* Original is 575.98px */
+  /* Your styles here */
+  .socials_links_container {
+    width: 24rem!important;
+  }
+
   .socials_logo_container {
-    max-width: 360px;
-    max-height: 360px;
+    max-width: 220px!important;
+    max-height: 220px!important;
   }
 
   .socials_logo_image {
-    max-width: 360px;
-    max-height: 360px;
+    max-width: 220px!important;
+    max-height: 220px!important;
   }
 
-  .socials_links_container {
-    width: 46rem;
+  .socials_list_a, .socials_list_b {
+    row-gap: 1rem;
   }
 
   .subheading {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .main_heading {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
-@media screen and (max-width: 840px) {
-  .socials_logo_container {
+/* Keyframes */
+@keyframes socials_links_active {
+  from {width: 0px;}
+  to {width: 100%;}
+}
+
+@keyframes socials_links_inactive {
+  0% {width: 100%;} 
+  100% {width: 0px;}
+}
+
+
+/* Styles for small devices / Skip the ones not required */
+/* @media (min-width: 576px) and (max-width: 767.98px) { */
+  /* Your styles here */
+/* } */
+
+/* Styles for medium devices */
+@media (max-width: 991.98px) {
+  /* Your styles here */
+    .socials_logo_container {
     max-width: 300px;
     max-height: 300px;
   }
@@ -223,5 +252,25 @@
   .main_heading {
     font-size: 3.4rem;
   }
+}
 
+/* Styles for large devices */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Your styles here */
+  .socials_links_container {
+    width: 46rem;
+  }
+
+  .subheading {
+    font-size: 1.2rem;
+  }
+
+  .main_heading {
+    font-size: 4rem;
+  }
+}
+
+/* Styles for extra large devices */
+@media (min-width: 1200px) {
+  /* Your styles here */
 }
